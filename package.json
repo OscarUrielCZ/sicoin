@@ -1,0 +1,19 @@
+{
+    "name": "sicoin",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/app.js",
+        "dev": "nodemon src/app.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.0",
+        "fs-extra": "^8.0.1",
+        "hbs": "^4.0.4",
+        "mongoose": "^5.5.11",
+        "multer": "^1.4.1"
+    }
+}

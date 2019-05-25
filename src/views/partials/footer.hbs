@@ -1,0 +1,41 @@
+</div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+                ESCOM - IPN
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="/public/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/public/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/public/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/dist/js/app-style-switcher.js"></script>
+    <!--Wave Effects -->
+    <script src="/public/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/public/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/public/dist/js/custom.js"></script>
+    {{#each scripts }}
+		<script src="/public/dist/js/pages/{{ this }}"></script>
+	{{/each }}
+</body>
+
+</html>
