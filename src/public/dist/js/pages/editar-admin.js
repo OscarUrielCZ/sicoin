@@ -1,9 +1,12 @@
 window.addEventListener('load', () => {
+    let guardar = document.getElementById('btn-guardar');
     let file = document.getElementById('img-reg');
-    let registro = document.getElementById('btn-reg');
+    let adminid = document.getElementById('id-reg').value;
+    let imgModified = false;
 
     // Vista previa
     file.addEventListener('change', function() {
+        imgModified = true;
         let previewCard = document.querySelector('.preview-card');
 
         if (file.files && file.files[0] && file.files[0].type.indexOf('image') != -1) {
@@ -22,32 +25,31 @@ window.addEventListener('load', () => {
         }
     });
 
-    // Registro
-    registro.addEventListener('click', (e) => {
-        e.preventDefault();
+    guardar.addEventListener('click', () => {
         let nombre = document.getElementById('nombre-reg').value;
         let clave = document.getElementById('clave-reg').value;
-        let image = file.files[0];
+        let imagen = file.files[0];
 
-        if (nombre && clave && image) {
+        if (nombre && clave && (!imgModified || imagen)) {
             let data = new FormData();
 
+            data.append('id', adminid);
             data.append('nombre', nombre);
             data.append('clave', clave);
-            data.append('image', image, image.name);
+            if (imgModified) data.append('image', imagen, imagen.name);
 
-            if (file.files[0].type.indexOf('image') != -1) {
-                fetch('/nuevo-admin', {
-                        method: 'POST',
-                        body: data
-                    })
-                    .then(() => location.reload())
-                    .catch(err => alert('Algo salió mal, intenta más tarde'));
-            } else {
-                alert('La imágen no es válida');
-            }
+            fetch('/actualiza-admin', {
+                    method: 'POST',
+                    body: data
+                })
+                .then(resp => resp.json())
+                .then(resp => {
+                    alert('Guardado correctamente');
+                })
+                .catch(err => console.log(err));
         } else {
-            alert('Por favor, rellenar correctamente todos los campos');
+            alert('Faltan datos');
         }
     });
+
 });

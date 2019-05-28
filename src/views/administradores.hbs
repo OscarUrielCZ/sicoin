@@ -1,46 +1,25 @@
 {{> header }}
 
 <div class="row">
-    <!-- Column -->
     <div class="col-lg-8 col-xlg-6 col-md-5">
         <div class="row">
-            <!--Primer usuario -->
-            <div class="col-lg-6 col-xlg-6 col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <center class="m-t-30"> <img src="public/assets/images/users/5.jpg" class="rounded-circle" width="150" />
-                            <h4 class="card-title m-t-10">Hanna Gover</h4>
-                        </center>
+            {{#each administradores}}
+                <div class="col-lg-6 col-xlg-6 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <center class="m-t-30"> <img src="public/assets/images/users/{{this.imagen}}" class="rounded-circle" width="150" />
+                                <h4 class="card-title m-t-10">{{this.nombre}}</h4>
+                            </center>
+                            <div style="float:right">
+                                <a href="editar-admin/{{this._id}}" class="transparentar"><i class="mdi mdi-lead-pencil"></i></a>
+                                <a href="eliminar-admin/{{this._id}}" class="transparentar"><i class="mdi mdi-delete"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!--Primer usuario -->
-            <!--Segundo usuario -->
-            <div class="col-lg-6 col-xlg-6 col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <center class="m-t-30"> <img src="public/assets/images/users/4.jpg" class="rounded-circle" width="150" />
-                            <h4 class="card-title m-t-10">Hanna Gover</h4>
-                        </center>
-                    </div>
-                </div>
-            </div>
-            <!--Segundo usuario -->
-            <!--Tercer usuario -->
-            <div class="col-lg-6 col-xlg-6 col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <center class="m-t-30"> <img src="public/assets/images/users/2.jpg" class="rounded-circle" width="150" />
-                            <h4 class="card-title m-t-10">Hanna Gover</h4>
-                        </center>
-                    </div>
-                </div>
-            </div>
-            <!--Tercer usuario -->
+            {{/each}}
         </div>
     </div>
-    <!-- Column -->
-    <!-- Column -->
     <div class="col-lg-4 col-xlg-6 col-md-7">
         <div class="card">
             <div class="card-body">
@@ -70,8 +49,6 @@
             </div>
         </div>
     </div>
-    <!-- Column -->
 </div>
-<!-- Row -->
 
 {{> footer }}

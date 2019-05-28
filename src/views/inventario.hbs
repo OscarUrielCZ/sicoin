@@ -20,78 +20,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">Agua</th>
-                            <td>Bonafont</td>
-                            <td>10</td>
-                            <td>1 Litro</td>
-                            <td>12</td>
-                            <td>
-                                <i class="mdi mdi-check"></i>
-                                <i class="mdi mdi-lead-pencil"></i>
-                                <i class="mdi mdi-delete"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Galletas</th>
-                            <td>Gamesa</td>
-                            <td>12</td>
-                            <td>550 gramos</td>
-                            <td>3</td>
-                            <td>
-                                <i class="mdi mdi-check"></i>
-                                <i class="mdi mdi-lead-pencil"></i>
-                                <i class="mdi mdi-delete"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Yogurth</th>
-                            <td>Danone</td>
-                            <td>8</td>
-                            <td>125 ml</td>
-                            <td>21</td>
-                            <td>
-                                <i class="mdi mdi-check"></i>
-                                <i class="mdi mdi-lead-pencil"></i>
-                                <i class="mdi mdi-delete"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Cigarros</th>
-                            <td>Malboro</td>
-                            <td>50</td>
-                            <td>8 piezas</td>
-                            <td>7</td>
-                            <td>
-                                <i class="mdi mdi-check"></i>
-                                <i class="mdi mdi-lead-pencil"></i>
-                                <i class="mdi mdi-delete"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Pan</th>
-                            <td>Bimbo</td>
-                            <td>26</td>
-                            <td>20 piezas</td>
-                            <td>13</td>
-                            <td>
-                                <i class="mdi mdi-check"></i>
-                                <i class="mdi mdi-lead-pencil"></i>
-                                <i class="mdi mdi-delete"></i>
-                            </td>
-                        </tr>
-                         <tr>
-                            <th scope="row">Agua</th>
-                            <td>Bonafont</td>
-                            <td>13</td>
-                            <td>1.5 Litros</td>
-                            <td>4</td>
-                            <td>
-                                <i class="mdi mdi-check"></i>
-                                <i class="mdi mdi-lead-pencil"></i>
-                                <i class="mdi mdi-delete"></i>
-                            </td>
-                        </tr>
+                        {{#each productos}}
+                            <tr>
+                                <th scope="row">{{this.nombre}}</th>
+                                <td>{{this.marca}}</td>
+                                <td>{{this.precio}}</td>
+                                <td>{{this.cantidad}}</td>
+                                <td>{{this.existencias}}</td>
+                                <td>
+                                    <span class="transparentar"><i class="mdi mdi-check"></i></span>
+                                    <span class="transparentar"><i class="mdi mdi-lead-pencil"></i></span>
+                                    <span class="transparentar"><i class="mdi mdi-delete"></i></span>
+                                </td>
+                            </tr>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>
@@ -106,34 +48,34 @@
                     <div class="form-group">
                         <label class="col-md-12">Nombre producto</label>
                         <div class="col-md-12">
-                            <input type="text" class="form-control form-control-line">
+                            <input id="nombre" type="text" class="form-control form-control-line">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12">Marca</label>
                         <div class="col-md-12">
-                            <input type="text" class="form-control form-control-line">
+                            <input id="marca" type="text" class="form-control form-control-line">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12">Precio</label>
                         <div class="col-md-12">
-                            <input type="number" class="form-control form-control-line">
+                            <input id="precio" type="number" class="form-control form-control-line">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12">Cantidad</label>
                         <div class="col-md-12">
-                            <input type="text" class="form-control form-control-line">
+                            <input id="cantidad" type="text" class="form-control form-control-line">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-12">Existencias</label>
                         <div class="col-md-12">
-                            <input type="number" class="form-control form-control-line">
+                            <input id="existencias" type="number" class="form-control form-control-line">
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-success" value="Agregar">
+                    <input type="button" id="agregar" class="btn btn-success" value="Agregar">
                 </form>
             </div>
         </div>

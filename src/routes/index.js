@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const express = require('express');
 
 const Administrador = require('../models/administrador');
+const Producto = require('../models/producto');
 
 const router = express.Router();
 
@@ -12,9 +13,26 @@ router.get('/', (req, res) => {
 });
 
 // Administradores
+
 router.get('/administradores', (req, res) => {
-    res.render('administradores', {
-        scripts: ['administradores.js']
+    Administrador.find((err, administradores) => {
+        let data;
+
+        if (err) {
+            data = {
+                ok: false,
+                err,
+                scripts: ['administradores.js']
+            };
+        } else {
+            data = {
+                ok: true,
+                administradores,
+                scripts: ['administradores.js']
+            }
+        }
+
+        return res.render('administradores', data);
     });
 });
 
@@ -50,12 +68,121 @@ router.post('/nuevo-admin', async(req, res) => {
     });
 });
 
-// Inventario
-router.get('/inventario', (req, res) => {
-    res.render('inventario');
+router.get('/eliminar-admin/:id', (req, res) => {
+    let adminid = req.params.id;
+
+    Administrador.findOneAndRemove({ _id: adminid }, async(err, adminDeleted) => {
+        if (err)
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        await fs.unlink(path.resolve(`src/public/assets/images/users/${adminDeleted.imagen}`));
+        return res.redirect('/administradores');
+    });
 });
 
+router.get('/editar-admin/:id', (req, res) => {
+    let adminid = req.params.id;
+
+    Administrador.findById({ _id: adminid }, (err, adminDB) => {
+        if (err) return res.render('administradores');
+        return res.render('editar-admin', {
+            administrador: adminDB,
+            scripts: ['editar-admin.js']
+        });
+    });
+});
+
+router.post('/actualiza-admin', async(req, res) => {
+    let adminid = req.body.id;
+    let imagen = req.file;
+    let data = {
+        nombre: req.body.nombre,
+        clave: req.body.clave
+    };
+    if (imagen) {
+        let ext = path.extname(imagen.originalname);
+        let targetPath = path.resolve(`src/public/assets/images/users/${imagen.filename}${ext}`);
+
+        data.imagen = imagen.filename + ext;
+
+        await fs.rename(imagen.path, targetPath);
+    }
+
+    Administrador.findByIdAndUpdate({ _id: adminid }, data, async(err, admin) => {
+        if (err) {
+            if (imagen)
+                await fs.unlink(targetPath);
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        }
+        if (imagen)
+            await fs.unlink(path.resolve(`src/public/assets/images/users/${admin.imagen}`));
+
+        return res.json({
+            ok: true,
+            adminintrador: admin
+        });
+    });
+});
+
+// Inventario
+
+router.get('/inventario', async(req, res) => {
+    Producto.find((err, productos) => {
+        let data;
+
+        if (err) {
+            data = {
+                ok: false,
+                err,
+                scripts: ['inventario.js']
+            };
+        } else {
+            data = {
+                ok: true,
+                productos,
+                scripts: ['inventario.js']
+            }
+        }
+
+        return res.render('inventario', data);
+    });
+});
+
+router.post('/nuevo-producto', (req, res) => {
+    let nombre = req.body.nombre;
+    let marca = req.body.marca;
+    let precio = req.body.precio;
+    let cantidad = req.body.cantidad;
+    let existencias = req.body.existencias;
+
+    let producto = new Producto({
+        nombre,
+        marca,
+        precio,
+        cantidad,
+        existencias
+    });
+
+    producto.save((err, prodBD) => {
+        if (err)
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        return res.json({
+            ok: true,
+            producto: prodBD
+        });
+    })
+})
+
 // Estadíticas
+
 router.get('/estadisticas', (req, res) => {
     res.render('estadisticas');
 });

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/sicoin', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/sicoin', { useNewUrlParser: true, useFindAndModify: false })
     .then(() => {
         const app = require('./server/index');
 
