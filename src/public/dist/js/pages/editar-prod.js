@@ -1,8 +1,8 @@
 window.addEventListener('load', () => {
-    let agregar = document.getElementById('agregar');
+    let idprod = document.getElementById('id-prod').value;
+    let guardar = document.getElementById('btn-guardar');
 
-    // Registrar nuevo producto
-    agregar.addEventListener('click', (e) => {
+    guardar.addEventListener('click', () => {
         let nombre = document.getElementById('nombre').value;
         let marca = document.getElementById('marca').value;
         let precio = document.getElementById('precio').value;
@@ -12,20 +12,24 @@ window.addEventListener('load', () => {
         if (nombre && marca && precio && cantidad && existencias) {
             let data = new FormData();
 
+            data.append('id', idprod);
             data.append('nombre', nombre);
             data.append('marca', marca);
             data.append('precio', precio);
             data.append('cantidad', cantidad);
             data.append('existencias', existencias);
 
-            fetch('/nuevo-producto', {
+            fetch('/actualizar-prod', {
                     method: 'POST',
                     body: data
                 })
-                .then(resp => location.reload())
-                .catch(err => alert('Algo salió mal, intentar más tarde'));
+                .then(resp => resp.json())
+                .then(resp => {
+                    alert('Guardado correctamente')
+                })
+                .catch(err => location.reload());
         } else {
-            alert('Por favor, rellenar correctamente todos los campos')
+            alert('Faltan datos');
         }
     });
 });

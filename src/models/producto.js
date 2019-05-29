@@ -5,7 +5,8 @@ const prodSchema = new Schema({
     marca: String,
     precio: Number,
     cantidad: String,
-    existencias: Number
+    existencias: Number,
+    ventas: { type: Number, default: 0 }
 });
 
 module.exports = model('Producto', prodSchema);

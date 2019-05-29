@@ -28,9 +28,9 @@
                                 <td>{{this.cantidad}}</td>
                                 <td>{{this.existencias}}</td>
                                 <td>
-                                    <span class="transparentar"><i class="mdi mdi-check"></i></span>
-                                    <span class="transparentar"><i class="mdi mdi-lead-pencil"></i></span>
-                                    <span class="transparentar"><i class="mdi mdi-delete"></i></span>
+                                    <a href="/comprar-producto/{{this._id}}" class="transparentar"><i class="mdi mdi-check"></i></a>
+                                    <a href="/editar-producto/{{this._id}}" class="transparentar"><i class="mdi mdi-lead-pencil"></i></a>
+                                    <a href="/borrar-producto/{{this._id}}" class="transparentar"><i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
                         {{/each}}

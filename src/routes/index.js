@@ -179,6 +179,97 @@ router.post('/nuevo-producto', (req, res) => {
             producto: prodBD
         });
     })
+});
+
+router.get('/borrar-producto/:id', (req, res) => {
+    let prodid = req.params.id;
+
+    Producto.findOneAndRemove({ _id: prodid }, (err, prodDeleted) => {
+        if (err)
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        return res.redirect('/inventario');
+    });
+});
+
+router.get('/comprar-producto/:id', (req, res) => {
+    let prodid = req.params.id;
+
+    Producto.findById({ _id: id }, (err, producto) => {
+        if (err)
+            return res.redirect('/inventario');
+        let existencias = producto.existencias;
+
+        if (existencias <= 0) return res.redirect('/inventario');
+
+        res.render('comprar-prod', {
+            producto
+        });
+    });
+});
+
+router.post('/hacer-compra/:id', (req, res) => {
+    Producto.findById({ _id: prodid }, (err, producto) => {
+        if (err)
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        let ventas = producto.ventas;
+
+
+        Producto.findByIdAndUpdate({ _id: prodid, }, {
+            existencias: existencias - 1,
+            ventas: ventas + 1
+        }, { new: true }, (err, prodUpdated) => {
+            if (err)
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            return res.redirect('/inventario');
+        });
+    });
+});
+
+router.get('/editar-producto/:id', (req, res) => {
+    let prodid = req.params.id;
+
+    Producto.findById({ _id: prodid }, (err, prodDB) => {
+        if (err) return res.render('inventario');
+        return res.render('editar-prod', {
+            producto: prodDB,
+            scripts: ['editar-prod.js']
+        });
+    });
+});
+
+router.post('/actualizar-prod', (req, res) => {
+    let idprod = req.body.id;
+    let data = {
+        nombre: req.body.nombre,
+        marca: req.body.marca,
+        precio: req.body.precio,
+        cantidad: req.body.cantidad,
+        existencias: req.body.existencias
+    };
+
+    console.log('id: ', idprod);
+    Producto.findByIdAndUpdate({ _id: idprod }, data, (err, lastprod) => {
+        if (err)
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        console.log('prod ', lastprod);
+        return res.json({
+            ok: true,
+            producto: lastprod
+        });
+    });
+
 })
 
 // Estadíticas

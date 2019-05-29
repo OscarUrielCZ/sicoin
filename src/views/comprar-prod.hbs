@@ -1,0 +1,35 @@
+{{> header }}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{producto.nombre}}</h3>
+                <form class="form-horizontal form-material">
+                    <div class="row">
+                        <input id="id-prod" type="text" value="{{producto._id}}" style="display: none">
+                        <div class="col-lg-6 col-xlg-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12">Nombre cliente</label>
+                                <div class="col-md-12">
+                                    <input id="nombrecliente" type="text" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xlg-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12">Cantidad</label>
+                                <div class="col-md-12">
+                                    <input id="cantidad" type="text" class="form-control form-control-line">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" class="btn btn-success" id="btn-comprar" value="Comprar">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> footer }}
