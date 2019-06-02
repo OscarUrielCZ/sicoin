@@ -5,6 +5,8 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">{{producto.nombre}}</h3>
+                <p style="margin-bottom: 2px"> Precio por unidad: {{producto.precio}} pesos</p>
+                <p style="margin-top: 2px"> Contenido: {{producto.cantidad}}</p>
                 <form class="form-horizontal form-material">
                     <div class="row">
                         <input id="id-prod" type="text" value="{{producto._id}}" style="display: none">
@@ -20,7 +22,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Cantidad</label>
                                 <div class="col-md-12">
-                                    <input id="cantidad" type="text" class="form-control form-control-line">
+                                    <input id="cantidad" type="number" class="form-control form-control-line">
                                 </div>
                             </div>
                         </div>

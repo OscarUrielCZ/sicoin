@@ -45,6 +45,7 @@ window.addEventListener('load', () => {
                 .then(resp => resp.json())
                 .then(resp => {
                     alert('Guardado correctamente');
+                    location.href = '/administradores';
                 })
                 .catch(err => console.log(err));
         } else {

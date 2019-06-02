@@ -2,10 +2,11 @@ const { Schema, model } = require('mongoose');
 
 let ventaSchema = new Schema({
     prodID: String,
-    cantidad: String,
+    cantidad: Number,
     fecha: String,
     hora: String,
-    cliente: String
+    cliente: String,
+    ingreso: Number
 });
 
 module.exports = model('Venta', ventaSchema);

@@ -1,19 +1,55 @@
 {{> header }}
 
-<!-- ============================================================== -->
-<!-- Start Page Content -->
-<!-- ============================================================== -->
 <div class="row">
-    <div class="col-12">
+    <div class="col-md-7">
         <div class="card">
             <div class="card-body">
-                This is some text within a card block.
+                <h4 class="card-title">Reporte del día</h4>
+                <div class="d-flex align-items-center flex-row m-t-30">
+                    <div class="display-5 text-info"><i class="wi wi-day-cloudy"></i></div>
+                    <div class="m-l-10">
+                        <h3 class="m-b-0">{{fecha.diasemana}}</h3><small>{{fecha.mes}}, {{fecha.dia}}</small>
+                    </div>
+                </div>
+                <table class="table no-border mini-table m-t-20">
+                    <tbody>
+                        <tr>
+                            <td class="text-muted">Ganancias</td>
+                            <td class="font-medium">{{ingresos}} pesos</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">Ventas</td>
+                            <td class="font-medium">{{ventas}} productos</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">Producto más vendido</td>
+                            <td class="font-medium">{{bestseller.nombre}} {{bestseller.marca}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Ultimas ventas -->
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Últimas ventas del día</h4>
+                <div class="feed-widget">
+                    <ul class="list-style-none feed-body m-0 p-b-20">
+                        {{#each ultimasventas}}
+                            <li class="feed-item">
+                                <div class="feed-icon bg-{{this.color}}">
+                                    <i class="ti-shopping-cart"></i>
+                                </div>
+                                {{this.cantidad}} {{this.producto.nombre}} (${{this.ganancias}})<span class="ml-auto font-12 text-muted">{{this.hora}} hrs</span>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!-- ============================================================== -->
-<!-- End PAge Content -->
-<!-- ============================================================== -->
 
 {{> footer }}
