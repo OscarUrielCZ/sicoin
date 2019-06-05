@@ -4,9 +4,9 @@ SICOIN es una aplicación web para el control de inventarios
 
 ## Integrantes
 
-Benitez Miranda Samuel Eduardo
-Cortés Zanabria Oscar Uriel
-Hernández Escudero Luis Hugo
+-Benitez Miranda Samuel Eduardo
+-Cortés Zanabria Oscar Uriel
+-Hernández Escudero Luis Hugo
 
 ## Requerimientos
 
