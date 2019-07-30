@@ -33,6 +33,7 @@ module.exports = {
         let ides = [],
             productos = [];
         let producto, parcialventas;
+        let bestseller;
 
         for (let i = 0; i < ventas.length; i++) {
             if (ides.indexOf(ventas[i].prodID) == -1) {
@@ -49,12 +50,17 @@ module.exports = {
             totalIngresos += ventas[i].ingreso;
             totalVentas += ventas[i].cantidad;
         }
-
-        producto = productos[0];
-        for (let i = 1; i < productos.length; i++) {
-            if (productos[i].ventas > producto.ventas)
-                producto = productos[i];
+        if (productos.length > 0) {
+            producto = productos[0];
+            for (let i = 1; i < productos.length; i++) {
+                if (productos[i].ventas > producto.ventas)
+                    producto = productos[i];
+            }
+            bestseller = producto.producto
+        } else {
+            bestseller = undefined;
         }
+
 
         let auxventas = ventas.reverse().slice(0, 5);
         let ultimasventas = [];
@@ -70,9 +76,9 @@ module.exports = {
 
         res.render('index', {
             fecha,
+            bestseller,
             ingresos: totalIngresos,
             ventas: totalVentas,
-            bestseller: producto.producto,
             ultimasventas,
         });
     }
